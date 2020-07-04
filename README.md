@@ -6,7 +6,7 @@
 
 ## Getting Started
 
-Run application backend application:
+Run backend application:
 
 ```
 cd backend
