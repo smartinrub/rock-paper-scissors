@@ -1,6 +1,7 @@
 package com.sergiomartinrubio.backend.service;
 
 import com.sergiomartinrubio.backend.model.Choice;
+import com.sergiomartinrubio.backend.model.GamesSummary;
 import com.sergiomartinrubio.backend.model.Result;
 import com.sergiomartinrubio.backend.model.ResultSummary;
 import com.sergiomartinrubio.backend.util.RandomChoiceUtils;
@@ -48,5 +49,9 @@ public class GameService {
 
     private ResultSummary buildResultSummary(Choice choice, Result result) {
         return new ResultSummary(UUID.randomUUID(), choice, ROCK, result, false);
+    }
+
+    public GamesSummary getGamesSummary() {
+        return null;
     }
 }

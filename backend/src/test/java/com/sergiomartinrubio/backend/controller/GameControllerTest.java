@@ -1,6 +1,7 @@
 package com.sergiomartinrubio.backend.controller;
 
 import com.sergiomartinrubio.backend.model.Choice;
+import com.sergiomartinrubio.backend.model.GamesSummary;
 import com.sergiomartinrubio.backend.model.Result;
 import com.sergiomartinrubio.backend.model.ResultSummary;
 import com.sergiomartinrubio.backend.service.GameService;
@@ -81,6 +82,29 @@ class GameControllerTest {
 
         // THEN
         verify(gameService).removeResults(GAME_ID);
+    }
+
+    @Test
+    void givenGamesSummaryWhenGetGamesSummaryThenReturnGamesSummary() throws Exception {
+        // GIVEN
+        GamesSummary gamesSummary = GamesSummary.builder()
+                .totalRoundsPlayed(10L)
+                .totalWinsFirstPlayers(5L)
+                .totalWinsSecondPlayers(2L)
+                .totalDraws(3L)
+                .build();
+        when(gameService.getGamesSummary()).thenReturn(gamesSummary);
+
+        // WHEN
+        // THEN
+        mockMvc.perform(get("/summary"))
+                .andDo(print())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.totalRoundsPlayed").value(10))
+                .andExpect(jsonPath("$.totalWinsFirstPlayers").value(5))
+                .andExpect(jsonPath("$.totalWinsSecondPlayers").value(2))
+                .andExpect(jsonPath("$.totalDraws").value(3));
     }
 
     private ResultSummary buildResultSummary(UUID roundId, Choice choice, Result result) {

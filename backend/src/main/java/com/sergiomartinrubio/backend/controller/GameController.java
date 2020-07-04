@@ -1,5 +1,6 @@
 package com.sergiomartinrubio.backend.controller;
 
+import com.sergiomartinrubio.backend.model.GamesSummary;
 import com.sergiomartinrubio.backend.model.ResultSummary;
 import com.sergiomartinrubio.backend.service.GameService;
 import lombok.RequiredArgsConstructor;
@@ -48,6 +49,11 @@ public class GameController {
         if (gameId != null) {
             gameService.removeResults(gameId);
         }
+    }
+
+    @GetMapping("/summary")
+    public GamesSummary getGamesSummary() {
+        return gameService.getGamesSummary();
     }
 
 }
