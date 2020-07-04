@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.sergiomartinrubio</groupId>
     <artifactId>backend</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0</version>
     <name>backend</name>
     <description>Spring Boot application to play rounds of Rock, Paper, Scissors</description>
 
