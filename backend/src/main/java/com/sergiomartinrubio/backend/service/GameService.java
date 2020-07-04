@@ -17,7 +17,7 @@ import static com.sergiomartinrubio.backend.model.Result.*;
 @RequiredArgsConstructor
 public class GameService {
     private final RandomChoiceUtils randomChoiceUtils;
-    private final GameSummaryService gameSummaryService;
+    private final RoundsSummaryService roundsSummaryService;
 
     public void play(UUID gameId) {
         Choice playerOneChoice = randomChoiceUtils.getRandomChoice();
@@ -25,25 +25,25 @@ public class GameService {
     }
 
     public void removeResults(UUID gameId) {
-        gameSummaryService.removeResults(gameId);
+        roundsSummaryService.removeResults(gameId);
     }
 
     private void saveResult(UUID gameId, Choice playerOneChoice) {
         switch (playerOneChoice) {
             case ROCK:
-                gameSummaryService.saveResult(gameId, buildResultSummary(ROCK, DRAW));
+                roundsSummaryService.saveResult(gameId, buildResultSummary(ROCK, DRAW));
                 break;
             case PAPER:
-                gameSummaryService.saveResult(gameId, buildResultSummary(PAPER, PLAYER_1_WINS));
+                roundsSummaryService.saveResult(gameId, buildResultSummary(PAPER, PLAYER_1_WINS));
                 break;
             case SCISSORS:
-                gameSummaryService.saveResult(gameId, buildResultSummary(SCISSORS, PLAYER_2_WINS));
+                roundsSummaryService.saveResult(gameId, buildResultSummary(SCISSORS, PLAYER_2_WINS));
                 break;
         }
     }
 
     public List<ResultSummary> getRoundsSummary(UUID gameId) {
-        return gameSummaryService.getResults(gameId);
+        return roundsSummaryService.getResults(gameId);
     }
 
     private ResultSummary buildResultSummary(Choice choice, Result result) {

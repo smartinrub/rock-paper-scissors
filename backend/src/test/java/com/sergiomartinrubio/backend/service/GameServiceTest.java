@@ -35,7 +35,7 @@ class GameServiceTest {
     private RandomChoiceUtils randomChoiceUtils;
 
     @Mock
-    private GameSummaryService gameSummaryService;
+    private RoundsSummaryService roundsSummaryService;
 
     @InjectMocks
     private GameService gameService;
@@ -45,7 +45,7 @@ class GameServiceTest {
         // GIVEN
         ResultSummary resultSummary = buildResultSummary(PAPER, PLAYER_1_WINS);
         when(randomChoiceUtils.getRandomChoice()).thenReturn(PAPER);
-        when(gameSummaryService.getResults(GAME_ID)).thenReturn(List.of(resultSummary));
+        when(roundsSummaryService.getResults(GAME_ID)).thenReturn(List.of(resultSummary));
 
         // WHEN
         gameService.play(GAME_ID);
@@ -56,7 +56,7 @@ class GameServiceTest {
         assertThat(roundsSummary.get(0).getPlayerOneChoice()).isEqualTo(PAPER);
         assertThat(roundsSummary.get(0).getPlayerTwoChoice()).isEqualTo(ROCK);
         assertThat(roundsSummary.get(0).getResult()).isEqualTo(PLAYER_1_WINS);
-        verify(gameSummaryService).saveResult(eq(GAME_ID), captor.capture());
+        verify(roundsSummaryService).saveResult(eq(GAME_ID), captor.capture());
         assertThat(captor.getValue().getResult()).isEqualTo(PLAYER_1_WINS);
         assertThat(captor.getValue().getPlayerOneChoice()).isEqualTo(PAPER);
         assertThat(captor.getValue().getPlayerTwoChoice()).isEqualTo(ROCK);
@@ -67,7 +67,7 @@ class GameServiceTest {
         // GIVEN
         ResultSummary resultSummary = buildResultSummary(SCISSORS, PLAYER_2_WINS);
         when(randomChoiceUtils.getRandomChoice()).thenReturn(SCISSORS);
-        when(gameSummaryService.getResults(GAME_ID)).thenReturn(List.of(resultSummary));
+        when(roundsSummaryService.getResults(GAME_ID)).thenReturn(List.of(resultSummary));
 
         // WHEN
         gameService.play(GAME_ID);
@@ -78,7 +78,7 @@ class GameServiceTest {
         assertThat(roundsSummary.get(0).getPlayerOneChoice()).isEqualTo(SCISSORS);
         assertThat(roundsSummary.get(0).getPlayerTwoChoice()).isEqualTo(ROCK);
         assertThat(roundsSummary.get(0).getResult()).isEqualTo(PLAYER_2_WINS);
-        verify(gameSummaryService).saveResult(eq(GAME_ID), captor.capture());
+        verify(roundsSummaryService).saveResult(eq(GAME_ID), captor.capture());
         assertThat(captor.getValue().getResult()).isEqualTo(PLAYER_2_WINS);
         assertThat(captor.getValue().getPlayerOneChoice()).isEqualTo(SCISSORS);
         assertThat(captor.getValue().getPlayerTwoChoice()).isEqualTo(ROCK);
@@ -89,7 +89,7 @@ class GameServiceTest {
         // GIVEN
         ResultSummary resultSummary = buildResultSummary(ROCK, DRAW);
         when(randomChoiceUtils.getRandomChoice()).thenReturn(ROCK);
-        when(gameSummaryService.getResults(GAME_ID)).thenReturn(List.of(resultSummary));
+        when(roundsSummaryService.getResults(GAME_ID)).thenReturn(List.of(resultSummary));
 
         // WHEN
         gameService.play(GAME_ID);
@@ -100,7 +100,7 @@ class GameServiceTest {
         assertThat(roundsSummary.get(0).getPlayerOneChoice()).isEqualTo(ROCK);
         assertThat(roundsSummary.get(0).getPlayerTwoChoice()).isEqualTo(ROCK);
         assertThat(roundsSummary.get(0).getResult()).isEqualTo(DRAW);
-        verify(gameSummaryService).saveResult(eq(GAME_ID), captor.capture());
+        verify(roundsSummaryService).saveResult(eq(GAME_ID), captor.capture());
         assertThat(captor.getValue().getResult()).isEqualTo(DRAW);
         assertThat(captor.getValue().getPlayerOneChoice()).isEqualTo(ROCK);
         assertThat(captor.getValue().getPlayerTwoChoice()).isEqualTo(ROCK);
@@ -112,7 +112,7 @@ class GameServiceTest {
         gameService.removeResults(GAME_ID);
 
         // THEN
-        verify(gameSummaryService).removeResults(GAME_ID);
+        verify(roundsSummaryService).removeResults(GAME_ID);
     }
 
     private ResultSummary buildResultSummary(Choice choice, Result result) {
