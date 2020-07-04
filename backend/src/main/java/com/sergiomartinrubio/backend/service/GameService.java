@@ -52,6 +52,20 @@ public class GameService {
     }
 
     public GamesSummary getGamesSummary() {
-        return null;
+        long totalWinsFirstPlayer = roundsSummaryService.getAllResultSummaries().stream()
+                .filter(resultSummary -> resultSummary.getResult() == PLAYER_1_WINS)
+                .count();
+        long totalWinsSecondPlayer = roundsSummaryService.getAllResultSummaries().stream()
+                .filter(resultSummary -> resultSummary.getResult() == PLAYER_2_WINS)
+                .count();
+        long totalDraws = roundsSummaryService.getAllResultSummaries().stream()
+                .filter(resultSummary -> resultSummary.getResult() == DRAW)
+                .count();
+        return GamesSummary.builder()
+                .totalRoundsPlayed((long) roundsSummaryService.getAllResultSummaries().size())
+                .totalWinsFirstPlayers(totalWinsFirstPlayer)
+                .totalWinsSecondPlayers(totalWinsSecondPlayer)
+                .totalDraws(totalDraws)
+                .build();
     }
 }

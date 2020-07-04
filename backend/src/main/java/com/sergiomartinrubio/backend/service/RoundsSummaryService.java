@@ -34,4 +34,8 @@ public class RoundsSummaryService {
         RESULT_SUMMARIES_BY_GAME_ID.get(gameId)
                 .forEach(resultSummary -> resultSummary.setCleared(true));
     }
+
+    public List<ResultSummary> getAllResultSummaries() {
+        return null;
+    }
 }

@@ -1,6 +1,7 @@
 package com.sergiomartinrubio.backend.service;
 
 import com.sergiomartinrubio.backend.model.Choice;
+import com.sergiomartinrubio.backend.model.GamesSummary;
 import com.sergiomartinrubio.backend.model.Result;
 import com.sergiomartinrubio.backend.model.ResultSummary;
 import com.sergiomartinrubio.backend.util.RandomChoiceUtils;
@@ -113,6 +114,26 @@ class GameServiceTest {
 
         // THEN
         verify(roundsSummaryService).removeResults(GAME_ID);
+    }
+
+    @Test
+    void givenResultSummariesWhenGetGamesSummaryThenReturnCorrectValues() {
+        // GIVEN
+        ResultSummary firstResultSummary = buildResultSummary(ROCK, DRAW);
+        ResultSummary secondResultSummary = buildResultSummary(SCISSORS, PLAYER_2_WINS);
+        ResultSummary thirdResultSummary = buildResultSummary(ROCK, DRAW);
+        ResultSummary fourthResultSummary = buildResultSummary(PAPER, PLAYER_1_WINS);
+        when(roundsSummaryService.getAllResultSummaries())
+                .thenReturn(List.of(firstResultSummary, secondResultSummary, thirdResultSummary, fourthResultSummary));
+
+        // WHEN
+        GamesSummary gamesSummary = gameService.getGamesSummary();
+
+        // THEN
+        assertThat(gamesSummary.getTotalRoundsPlayed()).isEqualTo(4);
+        assertThat(gamesSummary.getTotalWinsFirstPlayers()).isEqualTo(1);
+        assertThat(gamesSummary.getTotalWinsSecondPlayers()).isEqualTo(1);
+        assertThat(gamesSummary.getTotalDraws()).isEqualTo(2);
     }
 
     private ResultSummary buildResultSummary(Choice choice, Result result) {
