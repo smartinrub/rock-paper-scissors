@@ -31,6 +31,12 @@ Restart game:
 curl -v -X DELETE localhost:8080/restart
 ```
 
+Get All Games Summary:
+
+```
+curl -v -X GET localhost:8080/summary
+```
+
 ## Running Tests
 
 ```
