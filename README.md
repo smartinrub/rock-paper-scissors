@@ -28,7 +28,7 @@ npm install
 npm start
 ```
 
-The ReactJS app will be available at localhost:3000
+The ReactJS app will be available at http://localhost:3000
 
 ## API Usage
 
