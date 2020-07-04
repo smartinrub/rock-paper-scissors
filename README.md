@@ -32,7 +32,7 @@ The ReactJS app will be available at http://localhost:3000
 
 ## API Usage
 
-Play Round:
+### Play Round
 
 ```
 curl -v -X POST localhost:8080/play
@@ -45,7 +45,7 @@ HTTP/1.1 201
 Set-Cookie: JSESSIONID=D261498DD4F95C595FD2E5908BAA0C85; Path=/; HttpOnly
 ```
 
-Get Rounds Summary:
+### Get Rounds Summary
 
 ```
 curl -v -X GET localhost:8080/rounds-summary
@@ -85,7 +85,7 @@ Content-Type: application/json
 Set-Cookie: JSESSIONID=EE280D5754BBE866026F53A11AF7BD30; Path=/; HttpOnly
 ```
 
-Restart game:
+### Restart game
 
 ```
 curl -v -X DELETE localhost:8080/restart
@@ -98,7 +98,7 @@ HTTP/1.1 204
 Set-Cookie: JSESSIONID=1C036019BB1FF1BA7DCA3659521AA4E3; Path=/; HttpOnly
 ```
 
-Get All Games Summary:
+### Get All Games Summary
 
 ```
 curl -v -X GET localhost:8080/summary
