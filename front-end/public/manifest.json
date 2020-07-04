@@ -1,0 +1,11 @@
+{
+  "short_name": "Rock Paper Scissors",
+  "name": "Rock Paper Scissors",
+  "icons": [
+
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
