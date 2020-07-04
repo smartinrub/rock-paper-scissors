@@ -51,7 +51,7 @@ public class GameService {
         return new ResultSummary(UUID.randomUUID(), choice, ROCK, result, false);
     }
 
-    public GamesSummary getGamesSummary() {
+    public GamesSummary getAllGamesSummary() {
         long totalWinsFirstPlayer = roundsSummaryService.getAllResultSummaries().stream()
                 .filter(resultSummary -> resultSummary.getResult() == PLAYER_1_WINS)
                 .count();

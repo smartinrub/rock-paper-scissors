@@ -53,7 +53,7 @@ public class GameController {
 
     @GetMapping("/summary")
     public GamesSummary getGamesSummary() {
-        return gameService.getGamesSummary();
+        return gameService.getAllGamesSummary();
     }
 
 }

@@ -117,7 +117,7 @@ class GameServiceTest {
     }
 
     @Test
-    void givenResultSummariesWhenGetGamesSummaryThenReturnCorrectValues() {
+    void givenResultSummariesWhenGetAllGamesSummaryThenReturnCorrectValues() {
         // GIVEN
         ResultSummary firstResultSummary = buildResultSummary(ROCK, DRAW);
         ResultSummary secondResultSummary = buildResultSummary(SCISSORS, PLAYER_2_WINS);
@@ -127,7 +127,7 @@ class GameServiceTest {
                 .thenReturn(List.of(firstResultSummary, secondResultSummary, thirdResultSummary, fourthResultSummary));
 
         // WHEN
-        GamesSummary gamesSummary = gameService.getGamesSummary();
+        GamesSummary gamesSummary = gameService.getAllGamesSummary();
 
         // THEN
         assertThat(gamesSummary.getTotalRoundsPlayed()).isEqualTo(4);

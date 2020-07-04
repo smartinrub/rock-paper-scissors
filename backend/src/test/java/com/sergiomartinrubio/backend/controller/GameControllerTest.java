@@ -93,7 +93,7 @@ class GameControllerTest {
                 .totalWinsSecondPlayers(2L)
                 .totalDraws(3L)
                 .build();
-        when(gameService.getGamesSummary()).thenReturn(gamesSummary);
+        when(gameService.getAllGamesSummary()).thenReturn(gamesSummary);
 
         // WHEN
         // THEN
