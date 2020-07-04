@@ -15,7 +15,7 @@
     <description>Spring Boot application to play rounds of Rock, Paper, Scissors</description>
 
     <properties>
-        <java.version>1.8</java.version>
+        <java.version>14</java.version>
     </properties>
 
     <dependencies>
@@ -47,6 +47,14 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>9</source>
+                    <target>9</target>
+                </configuration>
             </plugin>
         </plugins>
     </build>
