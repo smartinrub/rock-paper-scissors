@@ -1,10 +1,12 @@
 package com.sergiomartinrubio.backend.service;
 
 import com.sergiomartinrubio.backend.model.ResultSummary;
+import org.springframework.stereotype.Service;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
+@Service
 public class RoundsSummaryService {
 
     private static final Map<UUID, List<ResultSummary>> RESULT_SUMMARIES_BY_GAME_ID = new HashMap<>();
