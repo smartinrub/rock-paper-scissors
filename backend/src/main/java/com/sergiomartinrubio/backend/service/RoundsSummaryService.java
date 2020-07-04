@@ -36,6 +36,8 @@ public class RoundsSummaryService {
     }
 
     public List<ResultSummary> getAllResultSummaries() {
-        return null;
+        return RESULT_SUMMARIES_BY_GAME_ID.values().stream()
+                .flatMap(Collection::stream)
+                .collect(Collectors.toList());
     }
 }

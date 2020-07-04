@@ -88,6 +88,22 @@ class RoundsSummaryServiceTest {
         assertThat(resultSummaries).hasSize(0);
     }
 
+    @Test
+    public void givenClearedResultSummaryWhenGetAllResultSummariesThenReturnAllResultSummaries() {
+        ResultSummary firstResultSummary = buildResultSummary(ROUND_ID_1, PAPER, PLAYER_1_WINS, false);
+        ResultSummary secondResultSummary = buildResultSummary(ROUND_ID_1, ROCK, DRAW, true);
+        ResultSummary thirdResultSummary = buildResultSummary(ROUND_ID_2, SCISSORS, PLAYER_2_WINS, false);
+        roundsSummaryService.saveResult(GAME_ID_1, firstResultSummary);
+        roundsSummaryService.saveResult(GAME_ID_2, secondResultSummary);
+        roundsSummaryService.saveResult(GAME_ID_1, thirdResultSummary);
+
+        // WHEN
+        List<ResultSummary> allResultSummaries = roundsSummaryService.getAllResultSummaries();
+
+        // THEN
+        assertThat(allResultSummaries).contains(firstResultSummary, secondResultSummary, thirdResultSummary);
+    }
+
     private ResultSummary buildResultSummary(UUID roundId, Choice choice, Result result, Boolean cleared) {
         return new ResultSummary(roundId, choice, ROCK, result, cleared);
     }
