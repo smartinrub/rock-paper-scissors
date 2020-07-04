@@ -2,20 +2,34 @@ package com.sergiomartinrubio.backend.service;
 
 import com.sergiomartinrubio.backend.model.ResultSummary;
 
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class RoundsSummaryService {
 
+    private static final Map<UUID, List<ResultSummary>> RESULT_SUMMARIES_BY_GAME_ID = new HashMap<>();
+
     public void saveResult(UUID gameId, ResultSummary resultSummary) {
-
-    }
-
-    public void removeResults(UUID gameId) {
-
+        if (RESULT_SUMMARIES_BY_GAME_ID.get(gameId) == null) {
+            List<ResultSummary> resultSummaries = new ArrayList<>();
+            resultSummaries.add(resultSummary);
+            RESULT_SUMMARIES_BY_GAME_ID.put(gameId, resultSummaries);
+        } else {
+            RESULT_SUMMARIES_BY_GAME_ID.get(gameId).add(resultSummary);
+        }
     }
 
     public List<ResultSummary> getResults(UUID gameId) {
-        return null;
+        if (RESULT_SUMMARIES_BY_GAME_ID.get(gameId) != null) {
+            return RESULT_SUMMARIES_BY_GAME_ID.get(gameId).stream()
+                    .filter(resultSummary -> !resultSummary.getCleared())
+                    .collect(Collectors.toList());
+        }
+        return List.of();
+    }
+
+    public void removeResults(UUID gameId) {
+        RESULT_SUMMARIES_BY_GAME_ID.get(gameId)
+                .forEach(resultSummary -> resultSummary.setCleared(true));
     }
 }
